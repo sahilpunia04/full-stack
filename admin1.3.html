@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+
+  <style>
+    /* =======================
+       CSS VARIABLES (THEMES)
+       ======================= */
+    :root {
+      --bg-color: #0b1220;
+      --panel-color: rgba(255, 255, 255, 0.08);
+      --text-color: #ffffff;
+      --border-color: rgba(255, 255, 255, 0.15);
+      --accent-color: #facc15;
+    }
+
+    body.light {
+      --bg-color: #f5f7fb;
+      --panel-color: #ffffff;
+      --text-color: #111827;
+      --border-color: #e5e7eb;
+      --accent-color: #2563eb;
+    }
+
+    /* =======================
+       GLOBAL STYLES
+       ======================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(circle at top, #111827, var(--bg-color));
+      color: var(--text-color);
+      min-height: 100vh;
+    }
+
+    /* =======================
+       DASHBOARD GRID
+       ======================= */
+    .dashboard {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      grid-template-rows: auto 1fr;
+      grid-template-areas:
+        "header header"
+        "sidebar main";
+      height: 100vh;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    /* =======================
+       HEADER
+       ======================= */
+    header {
+      grid-area: header;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    .theme-toggle {
+      background: var(--panel-color);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      background: var(--accent-color);
+      color: #fff;
+    }
+
+    /* =======================
+       SIDEBAR
+       ======================= */
+    .sidebar {
+      grid-area: sidebar;
+      background: var(--panel-color);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .sidebar h2 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar li {
+      padding: 12px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .sidebar li:hover {
+      background: var(--border-color);
+    }
+
+    /* =======================
+       MAIN CONTENT
+       ======================= */
+    main {
+      grid-area: main;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--panel-color);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 500;
+      min-height: 140px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    /* =======================
+       RESPONSIVE
+       ======================= */
+    @media (max-width: 768px) {
+      .dashboard {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "header"
+          "main"
+          "sidebar";
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard">
+
+    <!-- HEADER -->
+    <header>
+      <h1>Admin Dashboard</h1>
+      <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+    </header>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <h2>Navigation</h2>
+      <ul>
+        <li>Dashboard</li>
+        <li>Analytics</li>
+        <li>Users</li>
+        <li>Settings</li>
+      </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main>
+      <div class="card">Analytics</div>
+      <div class="card">Users</div>
+      <div class="card">Settings</div>
+    </main>
+
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light');
+
+      const btn = document.querySelector('.theme-toggle');
+      if (document.body.classList.contains('light')) {
+        btn.textContent = '☀️ Light Mode';
+      } else {
+        btn.textContent = '🌙 Dark Mode';
+      }
+    }
+  </script>
+
+</body>
+</html>
