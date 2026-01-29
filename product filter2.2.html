@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Product Filter</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f8f9fc;
+        padding: 30px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    .filter-box {
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    select {
+        padding: 8px 12px;
+        font-size: 16px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    .products {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .product {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid #dbe2ef;
+    }
+
+    .product h3 {
+        margin-bottom: 5px;
+    }
+
+    .price {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .tag {
+        display: inline-block;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 14px;
+        color: white;
+    }
+
+    .electronics {
+        background: #3b6cff;
+    }
+
+    .clothing {
+        background: #9fc5ff;
+        color: #000;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Product Filter</h1>
+
+<div class="filter-box">
+    <label for="filter">Filter by:</label>
+    <select id="filter" onchange="filterProducts()">
+        <option value="all">All Products</option>
+        <option value="electronics">Electronics</option>
+        <option value="clothing">Clothing</option>
+    </select>
+</div>
+
+<div class="products">
+
+    <div class="product electronics">
+        <h3>Wireless Headphones</h3>
+        <div class="price">$129.99</div>
+        <span class="tag electronics">electronics</span>
+    </div>
+
+    <div class="product clothing">
+        <h3>Cotton T-Shirt</h3>
+        <div class="price">$24.99</div>
+        <span class="tag clothing">clothing</span>
+    </div>
+
+    <div class="product electronics">
+        <h3>Bluetooth Speaker</h3>
+        <div class="price">$89.99</div>
+        <span class="tag electronics">electronics</span>
+    </div>
+
+    <div class="product clothing">
+        <h3>Denim Jeans</h3>
+        <div class="price">$59.99</div>
+        <span class="tag clothing">clothing</span>
+    </div>
+
+</div>
+
+<script>
+function filterProducts() {
+    const filter = document.getElementById("filter").value;
+    const products = document.querySelectorAll(".product");
+
+    products.forEach(product => {
+        if (filter === "all") {
+            product.style.display = "block";
+        } else if (product.classList.contains(filter)) {
+            product.style.display = "block";
+        } else {
+            product.style.display = "none";
+        }
+    });
+}
+</script>
+
+</body>
+</html>

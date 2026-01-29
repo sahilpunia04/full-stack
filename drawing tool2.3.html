@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SVG Drawing Tool</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+    }
+    .toolbar {
+        display: flex;
+        gap: 10px;
+        margin: 10px;
+    }
+    svg {
+        width: 90vw;
+        height: 70vh;
+        border: 2px dashed #ccc;
+        background: #fff;
+    }
+    button {
+        padding: 6px 12px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+    <input type="color" id="colorPicker" value="#2979ff">
+    <button id="undoBtn">Undo</button>
+    <span id="count">Circles drawn: 0</span>
+</div>
+
+<svg id="canvas"></svg>
+
+<script>
+const svg = document.getElementById("canvas");
+const colorPicker = document.getElementById("colorPicker");
+const undoBtn = document.getElementById("undoBtn");
+const countText = document.getElementById("count");
+
+let circles = [];
+
+svg.addEventListener("click", (e) => {
+    const rect = svg.getBoundingClientRect();
+    const cx = e.clientX - rect.left;
+    const cy = e.clientY - rect.top;
+
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("cx", cx);
+    circle.setAttribute("cy", cy);
+    circle.setAttribute("r", 8);
+    circle.setAttribute("fill", colorPicker.value);
+
+    svg.appendChild(circle);
+    circles.push(circle);
+    updateCount();
+});
+
+undoBtn.addEventListener("click", () => {
+    if (circles.length > 0) {
+        const last = circles.pop();
+        svg.removeChild(last);
+        updateCount();
+    }
+});
+
+function updateCount() {
+    countText.textContent = "Circles drawn: " + circles.length;
+}
+</script>
+
+</body>
+</html>
